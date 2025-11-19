@@ -1,23 +1,16 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { getEnv } from "./env";
 
 let supabaseClient: SupabaseClient | null = null;
-
-function assertEnv(name: string, value: string | undefined): string {
-  if (!value) {
-    throw new Error(`Missing ${name}. Please add it to .env.local.`);
-  }
-  return value;
-}
 
 export function getSupabaseClient() {
   if (supabaseClient) {
     return supabaseClient;
   }
 
-  const url = assertEnv('VITE_SUPABASE_URL', import.meta.env.VITE_SUPABASE_URL as string | undefined);
-  const anonKey = assertEnv('VITE_SUPABASE_ANON_KEY', import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined);
+  const { SUPABASE_URL, SUPABASE_ANON_KEY } = getEnv();
 
-  // TODO: I plan to inject service role keys from server-side contexts when we add admin APIs.
-  supabaseClient = createClient(url, anonKey);
+  console.info("[supabase] I am creating the shared Supabase client.");
+  supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   return supabaseClient;
 }

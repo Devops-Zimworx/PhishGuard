@@ -4,7 +4,7 @@ import type { SubmissionPayload, Variant } from '../types';
 export type WifiPortalProps = {
   variant: Variant;
   defaultLocationTag?: string;
-  onSubmit?: (payload: SubmissionPayload) => void;
+  onSubmit?: (payload: SubmissionPayload) => void | Promise<void>;
 };
 
 const variantCopy: Record<Variant, { headline: string; body: string }> = {

@@ -1,0 +1,25 @@
+.wifi-portal {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.wifi-portal--variant_a {
+  background: radial-gradient(circle at top, #f8fafc, #e2e8f0);
+  color: #0f172a;
+}
+
+.wifi-portal--variant_b {
+  background: linear-gradient(135deg, #111827, #0f766e);
+  color: #e2e8f0;
+}
+
+.success-message {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px dashed rgba(15, 23, 42, 0.2);
+}
+
+/* TODO: I want to move this styling into Tailwind once tokens are locked in. */

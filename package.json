@@ -5,9 +5,11 @@
   "type": "module",
   "dependencies": {
     "@supabase/supabase-js": "^2.83.0",
+    "date-fns": "^4.1.0",
     "qrcode.react": "^4.2.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "recharts": "^2.13.3"
   },
   "scripts": {
     "dev": "vite",

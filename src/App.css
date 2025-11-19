@@ -1,38 +1,232 @@
-.App {
-  text-align: center;
+.portal-shell {
+  min-height: 100vh;
+  padding: 64px 24px 96px;
+  background: radial-gradient(circle at top, #0f172a 0%, #020617 100%);
+  color: #e2e8f0;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (max-width: 640px) {
+  .portal-shell {
+    padding: 32px 18px 64px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.portal-hero {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.eyebrow {
+  font-size: 0.9rem;
+  color: #60a5fa;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.portal-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin: 0 0 16px;
+  line-height: 1.1;
+}
+
+.lede {
+  color: #cbd5f5;
+  font-size: 1.07rem;
+  margin-bottom: 24px;
+  max-width: 560px;
+}
+
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-pills span {
+  background: rgba(148, 163, 184, 0.15);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.network-card {
+  flex: 1;
+  min-width: 260px;
+  max-width: 320px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.6);
+}
+
+.network-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #a5b4fc;
+  font-size: 0.8rem;
+}
+
+.ssid {
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin: 6px 0 24px;
+  color: #f8fafc;
+}
+
+.network-card dl {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 16px;
 }
 
-.App-link {
-  color: #61dafb;
+.network-card dt {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.network-card dd {
+  margin: 4px 0 0;
+  font-size: 1.05rem;
+  color: #f1f5f9;
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 30px 80px rgba(2, 6, 23, 0.6);
+  backdrop-filter: blur(12px);
+}
+
+.portal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-heading h2 {
+  font-size: 1.6rem;
+  margin: 0 0 4px;
+}
+
+.form-heading p {
+  color: #cbd5f5;
+  margin: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.field span {
+  color: #cbd5f5;
+}
+
+.field input,
+.field select {
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.6);
+  color: #f8fafc;
+  padding: 14px 16px;
+  font-size: 1rem;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+
+.checkbox {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 0.95rem;
+  color: #cbd5f5;
+}
+
+.checkbox input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 4px;
+}
+
+.checkbox.optional span {
+  color: #94a3b8;
+}
+
+.portal-form button {
+  border: none;
+  border-radius: 18px;
+  padding: 16px 24px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #22d3ee, #6366f1);
+  color: #020617;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.portal-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.portal-form button:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.45);
+}
+
+.terms {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.info-card h2 {
+  font-size: 1.4rem;
+  margin-top: 0;
+}
+
+.info-card ul {
+  list-style: disc;
+  padding-left: 20px;
+  color: #cbd5f5;
+  line-height: 1.6;
+}
+
+.alert {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(248, 250, 252, 0.3);
+  background: rgba(248, 250, 252, 0.05);
+  color: #e2e8f0;
+  font-size: 0.95rem;
 }

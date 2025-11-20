@@ -1,0 +1,82 @@
+/* Demo Switcher Styles */
+
+.demo-switcher {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.demo-switcher-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.demo-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.demo-switcher button {
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: rgba(148, 163, 184, 0.1);
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.demo-switcher button:hover {
+  background: rgba(148, 163, 184, 0.2);
+  border-color: rgba(148, 163, 184, 0.5);
+  color: #f1f5f9;
+}
+
+.demo-switcher button.active {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.demo-switcher button.active:hover {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+}
+
+/* Adjust page content to account for fixed switcher */
+.landing-page,
+.awareness-success {
+  padding-top: 60px;
+}
+
+@media (max-width: 640px) {
+  .demo-switcher-content {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+
+  .demo-label {
+    font-size: 0.75rem;
+  }
+
+  .demo-switcher button {
+    padding: 6px 14px;
+    font-size: 0.875rem;
+  }
+}

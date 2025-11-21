@@ -1,72 +1,53 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import "./styles/variants.css";
-import { LandingPage } from "./components/LandingPage";
-import { SecurityAwarenessSuccess } from "./components/SecurityAwarenessSuccess";
-
-type AppState = 'landing' | 'awareness';
-
-interface SubmissionData {
-  fullName: string;
-  companyEmail: string;
-  purpose: string;
-  device: string;
-  acceptPolicy: boolean;
-  stayInformed: boolean;
-  submittedAt: string;
-}
+import { Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
+import './styles/variants.css';
+import { WifiRoute } from './components/WifiRoute';
+import { SuccessRoute } from './components/SuccessRoute';
+import { AdminRoute } from './components/AdminRoute';
+import { GenerateRoute } from './components/GenerateRoute';
+import { AdminLogin } from './components/AdminLogin';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { NotFound } from './components/NotFound';
 
 function App() {
-  const [appState, setAppState] = useState<AppState>('landing');
-  const [submissionData, setSubmissionData] = useState<SubmissionData | null>(null);
-
-  // I'm logging the current build env details before and after migrating to Vite.
-  useEffect(() => {
-    const isViteRuntime =
-      typeof import.meta !== "undefined" && Boolean(import.meta.env);
-    if (isViteRuntime) {
-      const diagnosticPayload = {
-        runtime: "vite",
-        mode: import.meta.env.MODE,
-        baseUrl: import.meta.env.BASE_URL,
-        customEnvKeys: Object.keys(import.meta.env).filter((key) =>
-          key.startsWith("VITE_")
-        ),
-      };
-      console.info("[diagnostic] environment snapshot", diagnosticPayload);
-    }
-  }, []);
-
-  const handleSubmit = (data: SubmissionData) => {
-    console.info("[app] received submission", data);
-    setSubmissionData(data);
-    
-    // Transition to awareness page after a short delay
-    setTimeout(() => {
-      setAppState('awareness');
-    }, 800);
-    
-    // Future: Wire this up to Supabase or other backend
-  };
-
-  const handleAwarenessClose = () => {
-    // Reset to landing page
-    setAppState('landing');
-    setSubmissionData(null);
-  };
-
-  if (appState === 'awareness' && submissionData) {
-    return (
-      <SecurityAwarenessSuccess
-        variant="variant_a"
-        submittedEmail={submissionData.companyEmail}
-        submittedName={submissionData.fullName}
-        onClose={handleAwarenessClose}
+  return (
+    <Routes>
+      {/* I'm setting up the root route to redirect to /wifi for the landing page. */}
+      <Route path="/" element={<Navigate to="/wifi" replace />} />
+      
+      {/* I'm setting up the WiFi portal route that handles both / and /wifi paths. */}
+      <Route path="/wifi" element={<WifiRoute />} />
+      
+      {/* I'm setting up the success page route for after form submission. */}
+      <Route path="/success" element={<SuccessRoute />} />
+      
+      {/* I'm setting up the admin login route. */}
+      <Route path="/admin/login" element={<AdminLogin />} />
+      
+      {/* I'm protecting the admin dashboard route with authentication. */}
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <AdminRoute />
+          </ProtectedRoute>
+        }
       />
-    );
-  }
-
-  return <LandingPage onSubmit={handleSubmit} />;
+      
+      {/* I'm protecting the QR generator route with authentication. */}
+      <Route
+        path="/generate"
+        element={
+          <ProtectedRoute>
+            <GenerateRoute />
+          </ProtectedRoute>
+        }
+      />
+      
+      {/* I'm setting up a catch-all route for 404 errors. */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
 }
 
 export default App;

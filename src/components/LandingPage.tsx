@@ -1,5 +1,24 @@
-import React, { useState, useMemo } from 'react';
+import { FormEvent, useState, useMemo } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSubmission } from '../hooks/useSubmission';
+import type { Variant } from '../types';
 import '../styles/landing-page.css';
+
+// Map URL source parameter to variant
+function mapSourceToVariant(source: string | null): Variant {
+  if (!source) return 'variant_a';
+  
+  const normalized = source.toLowerCase().trim();
+  
+  if (normalized === 'safe' || normalized === 'variant_a') {
+    return 'variant_a';
+  }
+  if (normalized === 'malicious' || normalized === 'variant_b') {
+    return 'variant_b';
+  }
+  
+  return 'variant_a';
+}
 
 const DEVICE_OPTIONS = [
   { label: 'Laptop / MacBook', value: 'laptop' },
@@ -15,11 +34,11 @@ const PURPOSE_OPTIONS = [
   'Security team verification',
 ];
 
-export interface LandingPageProps {
-  onSubmit?: (data: any) => void;
-}
-
-export function LandingPage({ onSubmit }: LandingPageProps) {
+export function LandingPage() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { submit, state: submissionState, errorMessage } = useSubmission();
+  
   const [formData, setFormData] = useState({
     fullName: '',
     companyEmail: '',
@@ -28,7 +47,14 @@ export function LandingPage({ onSubmit }: LandingPageProps) {
     acceptPolicy: false,
     stayInformed: true,
   });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+
+  // Extract parameters from URL
+  const source = searchParams.get('source');
+  const locationTag = searchParams.get('loc') || 'breakroom';
+  const variant = mapSourceToVariant(source);
+
+  const isSubmitting = submissionState === 'submitting';
+  const hasError = submissionState === 'error';
 
   const isFormValid = useMemo(() => {
     return (
@@ -53,27 +79,26 @@ export function LandingPage({ onSubmit }: LandingPageProps) {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!isFormValid || status === 'submitting') {
+    if (!isFormValid || isSubmitting) {
       return;
     }
 
-    setStatus('submitting');
-    const submissionPayload = {
-      ...formData,
-      submittedAt: new Date().toISOString(),
-    };
-    
-    console.info('[portal] wifi access request', submissionPayload);
+    // Submit to Supabase with all tracking data
+    await submit({
+      email: formData.companyEmail.trim(),
+      variant,
+      locationTag,
+    });
 
-    if (onSubmit) {
-      onSubmit(submissionPayload);
-    }
-
-    window.setTimeout(() => {
-      setStatus('success');
-    }, 800);
+    // Redirect to success page regardless of submission result
+    navigate('/success', {
+      state: {
+        email: formData.companyEmail.trim(),
+        variant,
+      },
+    });
   };
 
   return (
@@ -233,14 +258,23 @@ export function LandingPage({ onSubmit }: LandingPageProps) {
             <button
               type="submit"
               className="submit-button"
-              disabled={!isFormValid || status === 'submitting'}
+              disabled={!isFormValid || isSubmitting}
             >
-              {status === 'success'
+              {submissionState === 'success'
                 ? '✓ Passphrase Sent'
-                : status === 'submitting'
+                : isSubmitting
                 ? 'Securing Channel...'
                 : 'Generate Access Token'}
             </button>
+
+            {hasError && errorMessage && (
+              <div className="error-message">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+                <span>{errorMessage}</span>
+              </div>
+            )}
 
             <p className="form-terms">
               All guest traffic is segmented and inspected. Contact SOC at ext. 777 

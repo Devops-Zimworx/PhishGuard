@@ -1,0 +1,185 @@
+/* Admin Analytics Styles */
+.admin-analytics {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+/* Header */
+.analytics-header {
+  margin-bottom: 24px;
+}
+
+.analytics-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px;
+  letter-spacing: -0.025em;
+}
+
+.analytics-header p {
+  color: #64748b;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Summary Cards */
+.analytics-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.summary-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.summary-card h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 8px;
+}
+
+.summary-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.summary-value-small {
+  font-size: 1.25rem;
+}
+
+.summary-percent {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-left: 4px;
+}
+
+/* Charts Grid */
+.analytics-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.chart-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chart-card-wide {
+  grid-column: 1 / -1;
+}
+
+.chart-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 20px;
+}
+
+/* Empty State */
+.analytics-empty {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 48px;
+  text-align: center;
+}
+
+.analytics-empty p {
+  font-size: 1rem;
+  color: #64748b;
+  margin: 0 0 8px;
+}
+
+.analytics-empty-hint {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Recharts Customization */
+.admin-analytics .recharts-wrapper {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.admin-analytics .recharts-tooltip-wrapper {
+  outline: none;
+}
+
+.admin-analytics .recharts-default-tooltip {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.admin-analytics .recharts-tooltip-label {
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.admin-analytics .recharts-tooltip-item {
+  color: #475569 !important;
+}
+
+.admin-analytics .recharts-legend-wrapper {
+  padding-top: 16px;
+}
+
+.admin-analytics .recharts-legend-item-text {
+  color: #475569 !important;
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .analytics-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-card-wide {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .analytics-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .summary-value {
+    font-size: 1.5rem;
+  }
+
+  .chart-card {
+    padding: 16px;
+  }
+
+  .analytics-empty {
+    padding: 32px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .analytics-summary {
+    grid-template-columns: 1fr;
+  }
+}

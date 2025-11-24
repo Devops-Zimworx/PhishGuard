@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { AdminAnalytics } from './AdminAnalytics';
 import type { SubmissionRecord } from '../types';
 
 export type AdminDashboardProps = {
@@ -329,6 +330,9 @@ export function AdminDashboard({
           </button>
         </div>
       )}
+
+      {/* Analytics Section */}
+      <AdminAnalytics submissions={submissions} />
 
       {/* Results Count */}
       <div className="admin-dashboard__results">

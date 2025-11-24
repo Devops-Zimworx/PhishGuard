@@ -19,7 +19,7 @@ const variantCopy: Record<
     buttonText: "Connect Now",
   },
   variant_b: {
-    headline: "Executive WiFi - Faster Speed - Scan Here",
+    headline: "Executive WiFi - Faster Speeds💨",
     body: "Unlock priority bandwidth that keeps your critical projects moving.",
     buttonText: "Get Access Now",
   },

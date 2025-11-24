@@ -4,9 +4,10 @@ import type { SubmissionRecord } from '../types';
 export type AdminDashboardProps = {
   submissions?: SubmissionRecord[];
   onRevealToggle?: (submissionId: string, nextState: boolean) => void;
+  onLogout?: () => void;
 };
 
-export function AdminDashboard({ submissions = [], onRevealToggle }: AdminDashboardProps) {
+export function AdminDashboard({ submissions = [], onRevealToggle, onLogout }: AdminDashboardProps) {
   const totals = useMemo(() => {
     const base = { variant_a: 0, variant_b: 0 };
     for (const submission of submissions) {
@@ -18,8 +19,15 @@ export function AdminDashboard({ submissions = [], onRevealToggle }: AdminDashbo
   return (
     <section className="admin-dashboard">
       <header>
-        <h1>Admin Dashboard</h1>
-        <p>Real-time monitoring for QR phishing simulation.</p>
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p>Real-time monitoring for QR phishing simulation.</p>
+        </div>
+        {onLogout && (
+          <button onClick={onLogout} className="admin-dashboard__logout">
+            Logout
+          </button>
+        )}
       </header>
 
       <div className="admin-dashboard__stats">
@@ -65,7 +73,6 @@ export function AdminDashboard({ submissions = [], onRevealToggle }: AdminDashbo
         </tbody>
       </table>
 
-      {/* TODO: I plan to gate this component behind authentication once Supabase auth is wired up. */}
     </section>
   );
 }

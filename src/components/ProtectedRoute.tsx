@@ -1,14 +1,25 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-import { isAuthenticated } from './AdminLogin';
+import { useAuth } from '../contexts/AuthContext';
 
 export type ProtectedRouteProps = {
   children: ReactNode;
 };
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  // I'm checking if the user is authenticated before rendering protected content.
-  if (!isAuthenticated()) {
+  const { user, loading } = useAuth();
+
+  // Show loading state while checking authentication
+  if (loading) {
+    return (
+      <section className="admin-dashboard">
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
+  // Redirect to login if not authenticated
+  if (!user) {
     return <Navigate to="/admin/login" replace />;
   }
 
@@ -16,5 +27,3 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
 }
 
 export default ProtectedRoute;
-
-

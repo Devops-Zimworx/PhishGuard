@@ -233,3 +233,148 @@
   color: #475569;
   font-size: 0.95rem;
 }
+
+/* Admin Login Styles */
+.admin-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #f8fafc 0%, #e2e8f0 100%);
+  padding: 24px;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.admin-login__card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.admin-login header {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.admin-login h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px;
+  letter-spacing: -0.025em;
+}
+
+.admin-login header p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.admin-login form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-login label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.admin-login label span {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+  letter-spacing: 0.01em;
+}
+
+.admin-login input {
+  padding: 14px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #0f172a;
+  background: #ffffff;
+  transition: all 200ms ease;
+  width: 100%;
+}
+
+.admin-login input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.admin-login input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-login input::placeholder {
+  color: #94a3b8;
+}
+
+.admin-login button {
+  width: 100%;
+  padding: 16px;
+  background: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 200ms ease;
+  margin-top: 8px;
+  letter-spacing: 0.02em;
+}
+
+.admin-login button:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.admin-login button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.admin-login button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-login__error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-login__error::before {
+  content: "⚠️";
+  font-size: 1.1rem;
+}
+
+@media (max-width: 480px) {
+  .admin-login__card {
+    padding: 40px 28px;
+  }
+
+  .admin-login h1 {
+    font-size: 1.75rem;
+  }
+}

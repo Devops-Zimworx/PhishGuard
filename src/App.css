@@ -240,7 +240,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(to bottom, #f8fafc 0%, #e2e8f0 100%);
   padding: 24px;
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -253,7 +253,7 @@
 .admin-login h1 {
   font-size: 2rem;
   font-weight: 700;
-  color: #1e293b;
+  color: #0f172a;
   margin: 0 0 8px;
   letter-spacing: -0.025em;
 }
@@ -268,21 +268,10 @@
   background: #ffffff;
   border-radius: 24px;
   padding: 48px 40px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.05);
   width: 100%;
   max-width: 420px;
-  position: relative;
-}
-
-.admin-login form::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-  border-radius: 24px 24px 0 0;
+  border: 1px solid #e2e8f0;
 }
 
 .admin-login label {
@@ -311,9 +300,9 @@
 
 .admin-login input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #0f172a;
   background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
 }
 
 .admin-login input:disabled {
@@ -328,7 +317,7 @@
 .admin-login button {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #0f172a;
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -341,8 +330,9 @@
 }
 
 .admin-login button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(102, 126, 234, 0.4);
+  background: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3);
 }
 
 .admin-login button:active:not(:disabled) {

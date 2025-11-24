@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AdminAnalytics } from './AdminAnalytics';
+import { ExportControls } from './ExportControls';
 import type { SubmissionRecord } from '../types';
 
 export type AdminDashboardProps = {
@@ -284,6 +285,8 @@ export function AdminDashboard({
           onChange={(e) => setSearchQuery(e.target.value)}
           className="filter-search"
         />
+
+        <ExportControls data={submissions} filteredData={filteredAndSortedData} />
 
         <select value={variantFilter} onChange={(e) => setVariantFilter(e.target.value)}>
           <option value="all">All Variants</option>

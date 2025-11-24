@@ -12,7 +12,7 @@ export function AdminRoute() {
   const [submissions, setSubmissions] = useState<SubmissionRecord[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // I'm fetching submissions from Supabase when the component mounts.
+  // Fetch submissions from Supabase
   useEffect(() => {
     async function fetchSubmissions() {
       if (!supabase) {
@@ -41,10 +41,45 @@ export function AdminRoute() {
     fetchSubmissions();
   }, [supabase]);
 
+  // Set up real-time subscription for new submissions
+  useEffect(() => {
+    if (!supabase) return;
+
+    const channel = supabase
+      .channel('phishing_submissions_changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'phishing_submissions',
+        },
+        (payload) => {
+          console.log('Real-time update:', payload);
+
+          if (payload.eventType === 'INSERT') {
+            setSubmissions((prev) => [payload.new as SubmissionRecord, ...prev]);
+          } else if (payload.eventType === 'UPDATE') {
+            setSubmissions((prev) =>
+              prev.map((sub) =>
+                sub.id === payload.new.id ? (payload.new as SubmissionRecord) : sub
+              )
+            );
+          } else if (payload.eventType === 'DELETE') {
+            setSubmissions((prev) => prev.filter((sub) => sub.id !== payload.old.id));
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [supabase]);
+
+  // Handle individual reveal toggle
   const handleRevealToggle = async (submissionId: string, nextState: boolean) => {
-    if (!supabase) {
-      return;
-    }
+    if (!supabase) return;
 
     try {
       const { error } = await supabase
@@ -55,7 +90,7 @@ export function AdminRoute() {
       if (error) {
         console.error('Failed to update reveal status', error);
       } else {
-        // I'm updating the local state to reflect the change immediately.
+        // Update local state immediately for better UX
         setSubmissions((prev) =>
           prev.map((sub) => (sub.id === submissionId ? { ...sub, revealed: nextState } : sub))
         );
@@ -65,6 +100,32 @@ export function AdminRoute() {
     }
   };
 
+  // Handle bulk reveal
+  const handleBulkReveal = async (submissionIds: string[]) => {
+    if (!supabase || submissionIds.length === 0) return;
+
+    try {
+      const { error } = await supabase
+        .from('phishing_submissions')
+        .update({ revealed: true })
+        .in('id', submissionIds);
+
+      if (error) {
+        console.error('Failed to bulk update reveal status', error);
+      } else {
+        // Update local state immediately
+        setSubmissions((prev) =>
+          prev.map((sub) =>
+            submissionIds.includes(sub.id) ? { ...sub, revealed: true } : sub
+          )
+        );
+      }
+    } catch (error) {
+      console.error('Error bulk updating reveal status', error);
+    }
+  };
+
+  // Handle logout
   const handleLogout = async () => {
     const { error } = await signOut();
     if (error) {
@@ -77,7 +138,9 @@ export function AdminRoute() {
   if (loading) {
     return (
       <section className="admin-dashboard">
-        <p>Loading submissions...</p>
+        <div className="admin-dashboard__loading">
+          <p>Loading submissions...</p>
+        </div>
       </section>
     );
   }
@@ -86,9 +149,8 @@ export function AdminRoute() {
     <AdminDashboard
       submissions={submissions}
       onRevealToggle={handleRevealToggle}
+      onBulkReveal={handleBulkReveal}
       onLogout={handleLogout}
     />
   );
 }
-
-

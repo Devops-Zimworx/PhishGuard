@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import './styles/variants.css';
 import './styles/qr-generator.css';
+import './styles/admin-dashboard.css';
 import { WifiRoute } from './components/WifiRoute';
 import { SuccessRoute } from './components/SuccessRoute';
 import { AdminRoute } from './components/AdminRoute';

@@ -8,7 +8,7 @@ export type SuccessMessageProps = {
 const variantSuccessCopy: Record<Variant, { title: string; subtitle: string }> = {
   variant_a: {
     title: 'Connected! Check your inbox.',
-    subtitle: 'Access details arrive shortly. Keep this page open for confirmation.',
+    subtitle: 'Access details will be sent to your inbox. Reach out in 24 hours if you don\'t receive it.',
   },
   variant_b: {
     title: 'Access granted! Enjoy high-speed executive bandwidth.',

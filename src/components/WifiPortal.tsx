@@ -73,7 +73,7 @@ export function WifiPortal({
                 name="email"
                 type="email"
                 className="form-input"
-                placeholder="you@zimworx.com"
+                placeholder="you@zimworx.org"
                 required
                 disabled={isSubmitting}
               />
@@ -85,14 +85,24 @@ export function WifiPortal({
                 <label htmlFor="locationTag" className="form-label-optional">
                   Location (optional)
                 </label>
-                <input
+                <select
                   id="locationTag"
                   name="locationTag"
-                  type="text"
                   className="form-input"
-                  placeholder="e.g., breakroom, lobby"
                   disabled={isSubmitting}
-                />
+                >
+                  <option value="">Select a location</option>
+                  <option value="The Grind">The Grind</option>
+                  <option value="2nd Floor">2nd Floor</option>
+                  <option value="7th Floor">7th Floor</option>
+                  <option value="8th Floor">8th Floor</option>
+                  <option value="9th Floor">9th Floor</option>
+                  <option value="11th Floor">11th Floor</option>
+                  <option value="13th Floor">13th Floor</option>
+                  <option value="14th Floor">14th Floor</option>
+                  <option value="Basement">Basement</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
             )}
 

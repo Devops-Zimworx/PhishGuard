@@ -14,9 +14,9 @@ const variantCopy: Record<
   { headline: string; body: string; buttonText: string }
 > = {
   variant_a: {
-    headline: "Free Guest WiFi - Scan to Connect",
-    body: "Enjoy secure guest connectivity with standard speeds approved by IT.",
-    buttonText: "Request Access",
+    headline: "Free Team Member WiFi",
+    body: "Enjoy secure guest connectivity with standard speeds approved by GTS.",
+    buttonText: "Connect Now",
   },
   variant_b: {
     headline: "Executive WiFi - Faster Speed - Scan Here",
@@ -147,7 +147,7 @@ export function WifiPortal({
           </div>
           <div className="trust-badge">
             <span className="badge-icon">✓</span>
-            <span className="badge-text">IT Approved</span>
+            <span className="badge-text">GTS Approved</span>
           </div>
         </div>
       </div>

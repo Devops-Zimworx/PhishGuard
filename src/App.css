@@ -1,8 +1,8 @@
 .portal-shell {
   min-height: 100vh;
   padding: 64px 24px 96px;
-  background: radial-gradient(circle at top, #0f172a 0%, #020617 100%);
-  color: #e2e8f0;
+  background: linear-gradient(to bottom, #f8fafc 0%, #e2e8f0 100%);
+  color: #0f172a;
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
     sans-serif;
 }
@@ -24,7 +24,7 @@
 
 .eyebrow {
   font-size: 0.9rem;
-  color: #60a5fa;
+  color: #6366f1;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 8px;
@@ -34,10 +34,11 @@
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   margin: 0 0 16px;
   line-height: 1.1;
+  color: #0f172a;
 }
 
 .lede {
-  color: #cbd5f5;
+  color: #475569;
   font-size: 1.07rem;
   margin-bottom: 24px;
   max-width: 560px;
@@ -50,28 +51,29 @@
 }
 
 .hero-pills span {
-  background: rgba(148, 163, 184, 0.15);
+  background: rgba(99, 102, 241, 0.1);
   padding: 8px 16px;
   border-radius: 999px;
   font-size: 0.9rem;
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: #475569;
 }
 
 .network-card {
   flex: 1;
   min-width: 260px;
   max-width: 320px;
-  background: rgba(15, 23, 42, 0.65);
-  border: 1px solid rgba(99, 102, 241, 0.4);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 24px;
   padding: 24px;
-  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .network-label {
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #a5b4fc;
+  color: #6366f1;
   font-size: 0.8rem;
 }
 
@@ -79,7 +81,7 @@
   font-size: 1.45rem;
   font-weight: 600;
   margin: 6px 0 24px;
-  color: #f8fafc;
+  color: #0f172a;
 }
 
 .network-card dl {
@@ -92,7 +94,7 @@
 
 .network-card dt {
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -100,7 +102,7 @@
 .network-card dd {
   margin: 4px 0 0;
   font-size: 1.05rem;
-  color: #f1f5f9;
+  color: #0f172a;
 }
 
 .portal-grid {
@@ -110,12 +112,11 @@
 }
 
 .card {
-  background: rgba(15, 23, 42, 0.75);
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 28px;
   padding: 32px;
-  box-shadow: 0 30px 80px rgba(2, 6, 23, 0.6);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .portal-form {
@@ -127,10 +128,11 @@
 .form-heading h2 {
   font-size: 1.6rem;
   margin: 0 0 4px;
+  color: #0f172a;
 }
 
 .form-heading p {
-  color: #cbd5f5;
+  color: #64748b;
   margin: 0;
 }
 
@@ -142,15 +144,15 @@
 }
 
 .field span {
-  color: #cbd5f5;
+  color: #475569;
 }
 
 .field input,
 .field select {
   border-radius: 14px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: rgba(15, 23, 42, 0.6);
-  color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
   padding: 14px 16px;
   font-size: 1rem;
   transition: border-color 150ms ease, box-shadow 150ms ease;
@@ -159,8 +161,8 @@
 .field input:focus,
 .field select:focus {
   outline: none;
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .checkbox {
@@ -168,7 +170,7 @@
   gap: 12px;
   align-items: flex-start;
   font-size: 0.95rem;
-  color: #cbd5f5;
+  color: #475569;
 }
 
 .checkbox input {
@@ -178,7 +180,7 @@
 }
 
 .checkbox.optional span {
-  color: #94a3b8;
+  color: #64748b;
 }
 
 .portal-form button {
@@ -212,12 +214,13 @@
 .info-card h2 {
   font-size: 1.4rem;
   margin-top: 0;
+  color: #0f172a;
 }
 
 .info-card ul {
   list-style: disc;
   padding-left: 20px;
-  color: #cbd5f5;
+  color: #475569;
   line-height: 1.6;
 }
 
@@ -225,8 +228,8 @@
   margin-top: 24px;
   padding: 18px;
   border-radius: 16px;
-  border: 1px solid rgba(248, 250, 252, 0.3);
-  background: rgba(248, 250, 252, 0.05);
-  color: #e2e8f0;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #475569;
   font-size: 0.95rem;
 }

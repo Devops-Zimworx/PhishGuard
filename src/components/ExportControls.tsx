@@ -87,7 +87,7 @@ export function ExportControls({ data, filteredData }: ExportControlsProps) {
 
             <button className="export-option" onClick={handleExportCSV}>
               <div className="export-option-main">
-                <span className="export-icon">📊</span>
+                <span className="export-icon"></span>
                 <div>
                   <div className="export-option-title">CSV Export</div>
                   <div className="export-option-desc">
@@ -100,7 +100,7 @@ export function ExportControls({ data, filteredData }: ExportControlsProps) {
 
             <button className="export-option" onClick={handleExportJSON}>
               <div className="export-option-main">
-                <span className="export-icon">📄</span>
+                <span className="export-icon"></span>
                 <div>
                   <div className="export-option-title">JSON Export</div>
                   <div className="export-option-desc">
@@ -117,7 +117,7 @@ export function ExportControls({ data, filteredData }: ExportControlsProps) {
 
             <button className="export-option" onClick={() => handleExportEmailList(true)}>
               <div className="export-option-main">
-                <span className="export-icon">📧</span>
+                <span className="export-icon"></span>
                 <div>
                   <div className="export-option-title">Unrevealed Emails</div>
                   <div className="export-option-desc">
@@ -130,7 +130,7 @@ export function ExportControls({ data, filteredData }: ExportControlsProps) {
 
             <button className="export-option" onClick={() => handleCopyEmails(true)}>
               <div className="export-option-main">
-                <span className="export-icon">📋</span>
+                <span className="export-icon"></span>
                 <div>
                   <div className="export-option-title">Copy to Clipboard</div>
                   <div className="export-option-desc">
@@ -143,7 +143,7 @@ export function ExportControls({ data, filteredData }: ExportControlsProps) {
 
             <button className="export-option" onClick={() => handleExportEmailList(false)}>
               <div className="export-option-main">
-                <span className="export-icon">📧</span>
+                <span className="export-icon"></span>
                 <div>
                   <div className="export-option-title">All Emails</div>
                   <div className="export-option-desc">
@@ -155,7 +155,7 @@ export function ExportControls({ data, filteredData }: ExportControlsProps) {
           </div>
 
           <div className="export-info">
-            💡 Exports respect current filters • {filteredData.length} of {data.length}{' '}
+            Exports respect current filters • {filteredData.length} of {data.length}{' '}
             records
           </div>
         </div>

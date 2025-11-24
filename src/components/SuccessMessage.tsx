@@ -24,7 +24,6 @@ export function SuccessMessage({ variant, submittedEmail }: SuccessMessageProps)
       <h2>{copy.title}</h2>
       <p>{copy.subtitle}</p>
       {submittedEmail && <p className="success-message__email">Sent to: {submittedEmail}</p>}
-      {/* TODO: I will eventually add subtle telemetry cues (icons, timers, etc.). */}
     </section>
   );
 }

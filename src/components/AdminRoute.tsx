@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AdminDashboard } from './AdminDashboard';
 import { useSupabaseClient } from '../hooks/useSupabaseClient';
+import { useAuth } from '../contexts/AuthContext';
 import type { SubmissionRecord } from '../types';
 
 export function AdminRoute() {
   const supabase = useSupabaseClient();
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
   const [submissions, setSubmissions] = useState<SubmissionRecord[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -61,6 +65,15 @@ export function AdminRoute() {
     }
   };
 
+  const handleLogout = async () => {
+    const { error } = await signOut();
+    if (error) {
+      console.error('Logout error:', error);
+    } else {
+      navigate('/admin/login', { replace: true });
+    }
+  };
+
   if (loading) {
     return (
       <section className="admin-dashboard">
@@ -69,7 +82,13 @@ export function AdminRoute() {
     );
   }
 
-  return <AdminDashboard submissions={submissions} onRevealToggle={handleRevealToggle} />;
+  return (
+    <AdminDashboard
+      submissions={submissions}
+      onRevealToggle={handleRevealToggle}
+      onLogout={handleLogout}
+    />
+  );
 }
 
 

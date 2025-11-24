@@ -1,33 +1,36 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getEnv } from '../utils/env';
-
-const AUTH_STORAGE_KEY = 'phishguard_admin_auth';
+import { useAuth } from '../contexts/AuthContext';
 
 export function AdminLogin() {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { signIn } = useAuth();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError('');
+    setLoading(true);
 
-    const env = getEnv();
-    const expectedPassword = env.ADMIN_PASSWORD;
+    try {
+      const { error: signInError } = await signIn(email, password);
 
-    if (!expectedPassword) {
-      setError('Admin password is not configured. Please set VITE_ADMIN_PASSWORD in your environment.');
-      return;
-    }
+      if (signInError) {
+        setError(signInError.message || 'Invalid credentials. Please try again.');
+        setLoading(false);
+        return;
+      }
 
-    if (password === expectedPassword) {
-      // I'm storing the auth state in localStorage for persistence across page reloads.
-      localStorage.setItem(AUTH_STORAGE_KEY, 'authenticated');
+      // Successfully signed in, navigate to admin dashboard
       navigate('/admin', { replace: true });
-    } else {
-      setError('Invalid password. Please try again.');
-      setPassword('');
+    } catch (err) {
+      setError('An unexpected error occurred. Please try again.');
+      console.error('Login error:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,40 +38,43 @@ export function AdminLogin() {
     <section className="admin-login">
       <header>
         <h1>Admin Login</h1>
-        <p>Enter the admin password to access the dashboard.</p>
+        <p>Enter your credentials to access the dashboard.</p>
       </header>
 
       <form onSubmit={handleSubmit}>
+        <label>
+          <span>Email</span>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="admin@example.com"
+            required
+            autoFocus
+            disabled={loading}
+          />
+        </label>
+
         <label>
           <span>Password</span>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter admin password"
+            placeholder="Enter your password"
             required
-            autoFocus
+            disabled={loading}
           />
         </label>
 
         {error && <div className="admin-login__error">{error}</div>}
 
-        <button type="submit">Login</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Signing in...' : 'Login'}
+        </button>
       </form>
     </section>
   );
 }
 
-// I'm exporting a utility function to check if the user is authenticated.
-export function isAuthenticated(): boolean {
-  return localStorage.getItem(AUTH_STORAGE_KEY) === 'authenticated';
-}
-
-// I'm exporting a utility function to clear authentication.
-export function clearAuth(): void {
-  localStorage.removeItem(AUTH_STORAGE_KEY);
-}
-
 export default AdminLogin;
-
-

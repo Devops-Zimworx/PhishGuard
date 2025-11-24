@@ -1,6 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 import { getSupabaseClient } from '../utils/supabase';
+import { fetchClientIp } from '../utils/ip';
+import { mapSubmissionArray, mapSubmissionFromDb } from '../utils/submissionMapper';
 import type {
   SubmissionFormData,
   SubmissionRecord,
@@ -57,14 +59,18 @@ export function useSupabase(): UseSupabaseReturn {
         // 'safe' QR codes are variant_a, 'malicious' are variant_b
         const variant = source === 'safe' ? 'variant_a' : 'variant_b';
 
-        // Map to database schema (snake_case columns)
+        const ipAddress = await fetchClientIp();
+
+        // I map the QR submission payload into the snake_case schema Supabase expects.
         const dbPayload = {
           email: data.email,
           variant,
           user_agent: userAgent,
-          ip_address: null, // To be captured server-side
+          ip_address: ipAddress,
           location_tag: data.locationTag || null,
         };
+
+        console.debug('[useSupabase.addSubmission] inserting payload', dbPayload);
 
         const { data: insertedData, error: insertError } = await supabase
           .from('phishing_submissions')
@@ -72,12 +78,18 @@ export function useSupabase(): UseSupabaseReturn {
           .select()
           .single();
 
+        console.debug('[useSupabase.addSubmission] raw Supabase response', {
+          id: insertedData?.id,
+          location_tag: insertedData?.location_tag,
+          ip_address: insertedData?.ip_address,
+        });
+
         if (insertError) {
           throw insertError;
         }
 
         setLoading((prev) => ({ ...prev, adding: false }));
-        return insertedData as SubmissionRecord;
+        return mapSubmissionFromDb(insertedData as any);
       } catch (err) {
         const errorMessage =
           err instanceof Error ? err.message : 'Failed to add submission';
@@ -135,12 +147,18 @@ export function useSupabase(): UseSupabaseReturn {
 
         const { data, error: queryError } = await query;
 
+        console.debug('[useSupabase.getSubmissions] raw Supabase rows preview', (data || []).slice(0, 3).map((row) => ({
+          id: row.id,
+          location_tag: row.location_tag,
+          ip_address: row.ip_address,
+        })));
+
         if (queryError) {
           throw queryError;
         }
 
         setLoading((prev) => ({ ...prev, fetching: false }));
-        return (data as SubmissionRecord[]) || [];
+        return mapSubmissionArray(data as any);
       } catch (err) {
         const errorMessage =
           err instanceof Error ? err.message : 'Failed to fetch submissions';
@@ -171,7 +189,12 @@ export function useSupabase(): UseSupabaseReturn {
               table: 'phishing_submissions',
             },
             (payload) => {
-              callback(payload.new as SubmissionRecord);
+              console.debug('[useSupabase.subscribe] realtime insert payload', {
+                id: (payload.new as any)?.id,
+                location_tag: (payload.new as any)?.location_tag,
+                ip_address: (payload.new as any)?.ip_address,
+              });
+              callback(mapSubmissionFromDb(payload.new as any));
             }
           )
           .subscribe();

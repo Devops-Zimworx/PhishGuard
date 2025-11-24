@@ -21,8 +21,8 @@ const ZIMWORX_LOCATIONS = [
 
 const VARIANT_INFO: Record<Variant, { name: string; description: string; color: string }> = {
   variant_a: {
-    name: 'Variant A: Guest WiFi',
-    description: 'Professional, polished design - "Free Guest WiFi"',
+    name: 'Variant A: Team Member WiFi',
+    description: 'Professional, polished design - "Free Team Member WiFi"',
     color: '#6366f1',
   },
   variant_b: {
@@ -149,7 +149,7 @@ export function QRGenerator({ baseUrl: initialBaseUrl }: QRGeneratorProps) {
               placeholder="https://yourdomain.com/wifi"
             />
             <p className="control-hint">
-              The base URL for your PhishGuard deployment
+              The base URL for your PhishGuard WiFi portal
             </p>
           </div>
 
@@ -210,7 +210,7 @@ export function QRGenerator({ baseUrl: initialBaseUrl }: QRGeneratorProps) {
                 value={customLocation}
                 onChange={(e) => setCustomLocation(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && addCustomLocation()}
-                placeholder="e.g., Meeting Room 3A"
+                placeholder="e.g., Trust Towers"
               />
               <button
                 className="add-button"
@@ -225,7 +225,7 @@ export function QRGenerator({ baseUrl: initialBaseUrl }: QRGeneratorProps) {
           {/* Action Buttons */}
           <div className="action-buttons">
             <button className="print-button" onClick={handlePrint}>
-              🖨️ Print All QR Codes
+              Print All QR Codes
             </button>
             <p className="action-hint">
               Selected: {selectedLocations.length} location(s) · Variant: {VARIANT_INFO[selectedVariant].name}
@@ -273,21 +273,21 @@ export function QRGenerator({ baseUrl: initialBaseUrl }: QRGeneratorProps) {
                       onClick={() => copyToClipboard(payload.url)}
                       title="Copy URL"
                     >
-                      📋 Copy URL
+                      Copy URL
                     </button>
                     <button
                       className="action-btn"
                       onClick={() => downloadQR(payload.location, 'svg')}
                       title="Download SVG"
                     >
-                      ⬇️ SVG
+                      SVG
                     </button>
                     <button
                       className="action-btn"
                       onClick={() => downloadQR(payload.location, 'png')}
                       title="Download PNG"
                     >
-                      ⬇️ PNG
+                      PNG
                     </button>
                   </div>
                 </div>

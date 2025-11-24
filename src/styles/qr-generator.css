@@ -1,0 +1,432 @@
+/* QR Generator Styles - Light Mode */
+
+.qr-generator-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Controls Section */
+.qr-controls {
+  margin-bottom: 3rem;
+}
+
+.qr-header {
+  margin-bottom: 2rem;
+}
+
+.qr-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #0f172a;
+}
+
+.qr-header p {
+  font-size: 1rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Control Groups */
+.control-group {
+  margin-bottom: 2rem;
+}
+
+.control-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.control-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.control-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.control-hint {
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin: 0.5rem 0 0;
+}
+
+/* Variant Selector */
+.variant-selector {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.variant-button {
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-family: inherit;
+}
+
+.variant-button:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.variant-button.active {
+  background: #f8fafc;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.variant-button-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.variant-radio {
+  font-size: 1.25rem;
+  color: #6366f1;
+}
+
+.variant-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.variant-description {
+  font-size: 0.875rem;
+  color: #64748b;
+  display: block;
+}
+
+/* Location Grid */
+.location-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.location-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.location-checkbox:hover {
+  background: #f8fafc;
+  border-color: #6366f1;
+}
+
+.location-checkbox input[type="checkbox"] {
+  width: 1.125rem;
+  height: 1.125rem;
+  cursor: pointer;
+}
+
+.location-checkbox input[type="checkbox"]:checked + span {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* Custom Location Input */
+.custom-location-input {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.custom-location-input .control-input {
+  flex: 1;
+}
+
+.add-button {
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.add-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  transform: translateY(-2px);
+}
+
+.add-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.print-button {
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.print-button:hover {
+  background: linear-gradient(135deg, #0891b2, #0e7490);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
+}
+
+.action-hint {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* QR Code Grid */
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: #64748b;
+  font-size: 1rem;
+}
+
+/* QR Card */
+.qr-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.qr-card:hover {
+  border-color: #6366f1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.qr-code-wrapper {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-code-wrapper svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* QR Card Info */
+.qr-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.qr-location {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.qr-variant-badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  align-self: flex-start;
+}
+
+.qr-url {
+  font-size: 0.8125rem;
+  color: #64748b;
+  word-break: break-all;
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  padding: 0.5rem;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+/* QR Actions */
+.qr-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  padding: 0.5rem 0.875rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.action-btn:hover {
+  background: #f8fafc;
+  border-color: #6366f1;
+  color: #0f172a;
+}
+
+/* Print Styles */
+@media print {
+  /* Hide controls and actions */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Show print-only elements */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Optimize layout for printing */
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin: 0;
+    page-break-inside: avoid;
+  }
+
+  .qr-card {
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    padding: 1rem;
+    page-break-inside: avoid;
+  }
+
+  .qr-code-wrapper {
+    background: #ffffff;
+    padding: 0.5rem;
+  }
+
+  .qr-location {
+    color: #000000;
+    font-size: 1.125rem;
+  }
+
+  .qr-url {
+    color: #333333;
+    font-size: 0.75rem;
+    background: #f5f5f5;
+  }
+
+  .print-instructions {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-bottom: 2px solid #000000;
+  }
+
+  .print-instructions h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+    color: #000000;
+  }
+
+  .print-instructions p {
+    margin: 0.25rem 0;
+    color: #333333;
+    font-size: 0.875rem;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .qr-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .variant-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .location-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .custom-location-input {
+    flex-direction: column;
+  }
+
+  .action-buttons {
+    width: 100%;
+  }
+
+  .print-button {
+    width: 100%;
+  }
+}
+
+/* Print-only elements (hidden by default) */
+.print-only {
+  display: none;
+}

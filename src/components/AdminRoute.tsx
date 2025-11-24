@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { AdminDashboard } from './AdminDashboard';
-import { useSupabase } from '../hooks/useSupabase';
+import { useSupabaseClient } from '../hooks/useSupabaseClient';
 import type { SubmissionRecord } from '../types';
 
 export function AdminRoute() {
-  const supabase = useSupabase();
+  const supabase = useSupabaseClient();
   const [submissions, setSubmissions] = useState<SubmissionRecord[]>([]);
   const [loading, setLoading] = useState(true);
 

@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import type { SubmissionPayload, SubmissionRecord } from '../types';
-import { useSupabase } from './useSupabase';
+import { useSupabaseClient } from './useSupabaseClient';
 
 export type SubmissionState = 'idle' | 'submitting' | 'success' | 'error';
 
 export function useSubmission() {
-  const supabase = useSupabase();
+  const supabase = useSupabaseClient();
   const [state, setState] = useState<SubmissionState>('idle');
   const [lastSubmission, setLastSubmission] = useState<SubmissionRecord | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

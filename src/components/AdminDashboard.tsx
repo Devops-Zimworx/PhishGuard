@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import type { SubmissionRecord } from '../types';
 
 export type AdminDashboardProps = {
@@ -229,11 +230,16 @@ export function AdminDashboard({
           <h1>Admin Dashboard</h1>
           <p>Real-time monitoring for phishing simulation</p>
         </div>
-        {onLogout && (
-          <button onClick={onLogout} className="admin-dashboard__logout">
-            Logout
-          </button>
-        )}
+        <div className="admin-dashboard__header-actions">
+          <Link to="/generate" className="admin-dashboard__qr-link">
+            Generate QR Codes
+          </Link>
+          {onLogout && (
+            <button onClick={onLogout} className="admin-dashboard__logout">
+              Logout
+            </button>
+          )}
+        </div>
       </header>
 
       {/* Statistics Panel */}

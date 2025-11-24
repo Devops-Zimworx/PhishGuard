@@ -30,6 +30,32 @@
   font-size: 0.95rem;
 }
 
+.admin-dashboard__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-dashboard__qr-link {
+  padding: 10px 20px;
+  background: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 200ms ease;
+  display: inline-block;
+}
+
+.admin-dashboard__qr-link:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
 .admin-dashboard__logout {
   padding: 10px 20px;
   background: #ef4444;
